@@ -1,0 +1,25 @@
+!!! Strict
+%html{"xml:lang" => "en", :lang => "en", :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %title Rego/Login/Logout Example
+    %style{:type => "text/css", :media => :screen}
+      :plain
+        body { font: 12px/21px Gotham }
+  %body
+    %script{:src => "http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php", :type => "text/javascript"}
+    %script{:type => "text/javascript"}
+      == var api_key = '#{$api_key}';
+      :plain
+        FB_RequireFeatures(["Connect"], function(){
+          FB.Facebook.init(api_key, '/connect',{"reloadIfSessionStateChanged":true});
+        });
+
+    - if logged_in?
+      %h1&== Welcome #{facebook_user.name}!
+      %a{:href => "#", :onclick => "FB.Connect.logoutAndRedirect('/')"} Log out
+      
+    - else
+      %h1 Log in
+      %a{:href => "#", :onclick => "FB.Connect.requireSession(); return false;"}
+        %img{:src => "http://static.ak.fbcdn.net/images/fbconnect/login-buttons/connect_light_medium_long.gif", :alt => "Connect"}/
