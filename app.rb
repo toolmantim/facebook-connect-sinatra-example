@@ -8,8 +8,6 @@ raise "No api_keys.yml was found" unless File.exist?(api_keys_file = "api_keys.y
 $keys = YAML.load(File.read(api_keys_file))
 $api_key, $secret_key = $keys['api_key'], $keys['secret_key']
 
-enable :sessions
-
 helpers do
   def logged_in?
     facebook_user
