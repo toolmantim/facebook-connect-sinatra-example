@@ -25,11 +25,6 @@ get '/' do
   haml :index
 end
 
-get '/screen.css' do
-  content_type "text/css"
-  sass :"styles/screen"
-end
-
 get '/connect' do
   haml :connect
 end
